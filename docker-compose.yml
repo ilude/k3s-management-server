@@ -1,0 +1,21 @@
+version: '2.4'
+services:
+  k3s_manangement_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ALPINE_VERSION: 'latest'
+        USER: ${CLUSTER_USERNAME}
+    hostname: k3s
+    container_name: k3s_manangement_server
+    image: ilude/k3s_manangement_server
+    stdin_open: true
+    tty: true 
+    # environment:
+    #   - "PUID=${PUID}"
+    #   - "PGID=${PGID}"
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
